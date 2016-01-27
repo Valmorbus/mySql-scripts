@@ -1,0 +1,78 @@
+USE Skola;
+
+-- Skapa Klasser
+INSERT INTO Klass (Kod, Namn, Arskurs) VALUES('KVALI', 'Kvalitetsäkrare', 2015);
+INSERT INTO Klass (Kod, Namn, Arskurs) VALUES('CSHAR', 'C# Programmering', 2014);
+INSERT INTO Klass (Kod, Namn, Arskurs) VALUES('JAVAP', 'Java Programmering', 2015);
+INSERT INTO Klass (Kod, Namn, Arskurs) VALUES('SOCIA', 'Sociala Medier', 2013);
+INSERT INTO Klass (Kod, Namn, Arskurs) VALUES('SPONT', 'SharePoint', 2015);
+
+-- Skapa Elever som tillhör klasser
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('8801016541', 'Kalle', 'Karlsson', 'kalle@karlsson.se', '0705123123', 'KVALI');
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('7501036741', 'Stina', 'Andersson', 'stina@andersson.se', '0703433123', 'KVALI');
+
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('9006036441', 'Anders', 'Andersson', 'anders@andersson.se', '0703321123', 'CSHAR');
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('9202036241', 'Anna', 'Svensson', 'anna@svensson.se', '070333423', 'CSHAR');
+
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('7602036141', 'Sara', 'Sarasson', 'sara@sarasson.se', '08234234', 'JAVAP');
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('9406033441', 'Olle', 'Persson', 'olle@persson.se', '070234233', 'JAVAP');
+
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('8802011212', 'Jonas', 'Jonasson', 'jonas@jonasson.se', '08343534', 'SOCIA');
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('9502036241', 'Annelie', 'Svensson', 'annelie@svensson.se', '070313423', 'SOCIA');
+
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('9309124241', 'Bo', 'Al', 'bo@al.se', '083345232', 'SPONT');
+INSERT INTO Elev (Personnummer, Fornamn, Efternamn, Epost, Telefon, Klasskod) VALUES('7512011122', 'Margareta', 'Al', 'margareta@al.se', '072341222', 'SPONT');
+
+-- Skapa Avdelningar
+INSERT INTO Avdelning (Namn) VALUES('IT');
+INSERT INTO Avdelning (Namn) VALUES('Bygg');
+INSERT INTO Avdelning (Namn) VALUES('Ekonomi');
+
+-- Skapa Lärare
+INSERT INTO Larare (Fornamn, Efternamn, Epost, Telefon, Avdelningsnummer) VALUES('Martin', 'Devins', 'martin.devins@nackademin.se', '070343434532', 1);
+INSERT INTO Larare (Fornamn, Efternamn, Epost, Telefon, Avdelningsnummer) VALUES('Sven', 'Svensson', 'sven.svensson@nackademin.se', '070234234623', 1);
+INSERT INTO Larare (Fornamn, Efternamn, Epost, Telefon, Avdelningsnummer) VALUES('Anna', 'Karlsson', 'anna.karlsson@nackademin.se', '072342343334', 2);
+INSERT INTO Larare (Fornamn, Efternamn, Epost, Telefon, Avdelningsnummer) VALUES('Margot', 'Andersson', 'margot.andersson@nackademin.se', '0834523457', 2);
+INSERT INTO Larare (Fornamn, Efternamn, Epost, Telefon, Avdelningsnummer) VALUES('Maria', 'Mariasson', 'maria.mariasson@nackademin.se', '0823423422', 3);
+
+-- Skapa kurser
+INSERT INTO Kurs (Kod, Namn, Startdatum, Poang) VALUES('DB001', 'Databasteknik', '2015-01-01', 20);
+INSERT INTO Kurs (Kod, Namn, Startdatum, Poang) VALUES('CS001','Programmering i C#', '2015-02-01', 30);
+INSERT INTO Kurs (Kod, Namn, Startdatum, Poang) VALUES('JA101','Programmering i Java', '2014-01-01', 40);
+INSERT INTO Kurs (Kod, Namn, Startdatum, Poang) VALUES('FB100','Facebook teknik', '2014-04-01', 10);
+INSERT INTO Kurs (Kod, Namn, Startdatum, Poang) VALUES('BH002','Bygga hus', '2015-01-01', 40);
+
+-- Skapa klassens kurser
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('KVALI', 'DB001');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('KVALI', 'CS001');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('CSHAR', 'CS001');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('CSHAR', 'DB001');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('JAVAP', 'JA101');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('SOCIA', 'FB100');
+INSERT INTO KlassKurs (Klasskod, Kurskod) VALUES('SPONT', 'DB001');
+
+-- Skapa kursernas lärare
+INSERT INTO Undervisar (Kurskod, Anstallningsnummer) VALUES('DB001', 1);
+INSERT INTO Undervisar (Kurskod, Anstallningsnummer) VALUES('CS001', 1);
+INSERT INTO Undervisar (Kurskod, Anstallningsnummer) VALUES('JA101', 2);
+INSERT INTO Undervisar (Kurskod, Anstallningsnummer) VALUES('FB100', 3);
+INSERT INTO Undervisar (Kurskod, Anstallningsnummer) VALUES('BH002', 3);
+
+-- Skapa lokaler
+INSERT INTO Lokal (Namn, AntalPlatser) VALUES('Stora lokalen', 10);
+INSERT INTO Lokal (Namn, AntalPlatser) VALUES('Mellan lokalen', 50);
+INSERT INTO Lokal (Namn, AntalPlatser) VALUES('Lilla lokalen', 20);
+
+-- Skapa Kurslokaler
+INSERT INTO KursLokal (Kurskod, Lokalnummer, Datum, Tid) VALUES('DB001', 1, '2015-01-01', '09:00');
+INSERT INTO KursLokal (Kurskod, Lokalnummer, Datum, Tid) VALUES('CS001', 2, '2015-02-01', '13:00');
+INSERT INTO KursLokal (Kurskod, Lokalnummer, Datum, Tid) VALUES('JA101', 2, '2014-01-01', '09:00');
+INSERT INTO KursLokal (Kurskod, Lokalnummer, Datum, Tid) VALUES('FB100', 3, '2014-04-01', '13:00');
+INSERT INTO KursLokal (Kurskod, Lokalnummer, Datum, Tid) VALUES('BH002', 3, '2015-01-01', '09:00');
+
+-- Skapa kursbetyg
+INSERT INTO KursBetyg (Personnummer, Kurskod, Betyg) VALUES('8801016541', 'DB001', 'VG');
+INSERT INTO KursBetyg (Personnummer, Kurskod, Betyg) VALUES('7501036741', 'DB001', 'G');
+INSERT INTO KursBetyg (Personnummer, Kurskod, Betyg) VALUES('9006036441', 'DB001', 'VG');
+INSERT INTO KursBetyg (Personnummer, Kurskod, Betyg) VALUES('9006036441', 'CS001', 'VG');
+INSERT INTO KursBetyg (Personnummer, Kurskod, Betyg) VALUES('9202036241', 'CS001', 'VG');

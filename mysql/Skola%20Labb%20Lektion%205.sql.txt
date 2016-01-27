@@ -1,0 +1,52 @@
+USE Skola;
+-- Fråga 1
+SELECT Elev.Efternamn, Elev.Fornamn, Klass.Namn FROM Elev
+	INNER JOIN Klass ON Elev.Klasskod = Klass.Kod
+	ORDER BY Klass.Namn, Elev.Efternamn;
+
+-- Fråga 2
+SELECT Larare.Efternamn, Larare.Fornamn, Avdelning.Namn FROM Larare
+	INNER JOIN Avdelning ON Larare.Avdelningsnummer = Avdelning.Avdelningsnummer
+	ORDER BY Avdelning.Namn;
+
+-- Fråga 3
+SELECT KursLokal.Datum, KursLokal.Tid, Lokal.Namn, Kurs.Namn FROM Kurs
+	INNER JOIN KlassKurs ON Kurs.Kod = KlassKurs.Kurskod
+	INNER JOIN KursLokal ON Kurs.Kod = KursLokal.Kurskod
+	INNER JOIN Lokal ON KursLokal.Lokalnummer = Lokal.Lokalnummer
+	WHERE KlassKurs.Klasskod = 'KVALI'
+	ORDER BY Kurslokal.Datum, KursLokal.Tid;
+
+-- Fråga 4
+SELECT * FROM KursLokal, Lokal WHERE KursLokal.Lokalnummer = Lokal.Lokalnummer;
+
+SELECT Lokal.Namn FROM Lokal WHERE Lokal.Lokalnummer NOT IN
+(SELECT Lokal.Lokalnummer FROM Lokal
+	INNER JOIN KursLokal ON Lokal.Lokalnummer = KursLokal.Lokalnummer
+	WHERE Kurslokal.Datum = '2015-01-01' AND KursLokal.Tid = '09:00');
+
+
+-- Fråga 5
+CREATE TABLE BetygVarde
+(
+	Betyg CHAR(2) PRIMARY KEY,
+	Varde tinyint NOT NULL
+);
+INSERT INTO BetygVarde VALUES('VG', 3);
+INSERT INTO BetygVarde VALUES('G', 2);
+INSERT INTO BetygVarde VALUES('IG', 1);
+
+ALTER TABLE KursBetyg 
+	ADD FOREIGN KEY (Betyg) REFERENCES BetygVarde(Betyg);
+
+SELECT Betyg FROM BetygVarde WHERE Varde=(SELECT ROUND(AVG(BetygVarde.Varde),0) FROM KursBetyg
+	INNER JOIN BetygVarde ON KursBetyg.Betyg = BetygVarde.Betyg
+	WHERE Kurskod='DB001');
+
+
+-- Fråga 6
+SELECT DISTINCT Elev.Efternamn, Elev.Fornamn, KursBetyg.Betyg FROM Elev
+	INNER JOIN KursBetyg ON Elev.Personnummer = KursBetyg.Personnummer
+	INNER JOIN Kurs ON KursBetyg.Kurskod = Kurs.Kod 
+	WHERE KursBetyg.Betyg = 'VG';
+
