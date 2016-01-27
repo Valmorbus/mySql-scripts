@@ -15,6 +15,12 @@ select * from elev
 order by Förnamn
 limit 5; 
 
+select * from elev
+order by förnamn desc;
+
+select * from elev
+order by Förnamn asc;
+
 select * from elev 
 where förnamn in ('Simon');
 
@@ -25,8 +31,34 @@ Select * from elev
 where exists (select * from klass
 where klass.kod = elev.Klasskod);
 
-Select * from lokal 
-where Lokalnummer > all (select lärare.Anställningsnummer from lärare);
 
 Select * from lokal 
-where Lokalnummer > any (select lärare.Anställningsnummer from lärare);
+where Lokalnummer > all (select lärare.Avdelningsnummer from lärare);
+
+Select * from lokal 
+where Lokalnummer > any (select lärare.Avdelningsnummer from lärare);
+
+select lärare.efternamn, lärare.förnamn, undervisar.kurskod from lärare
+inner join undervisar on lärare.anställningsnummer = undervisar.Anställningsnummer;
+
+select lärare.efternamn, lärare.förnamn, undervisar.kurskod  from lärare
+left join undervisar on lärare.anställningsnummer = undervisar.Anställningsnummer;
+
+select lärare.efternamn, lärare.förnamn, undervisar.kurskod  from lärare
+right join undervisar on lärare.anställningsnummer = undervisar.Anställningsnummer;
+
+select * from lärare
+full join undervisar; -- on lärare.anställningsnummer = undervisar.Anställningsnummer;
+
+select elev.förnamn from elev
+union 
+select klass.namn from klass;
+
+-- vyer
+create view utsikt as 
+select Elev.förnamn from elev
+where elev.förnamn like 'S%';
+
+drop view utsikt;
+
+select * from utsikt;
